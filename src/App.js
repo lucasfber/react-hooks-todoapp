@@ -56,7 +56,8 @@ class App extends React.Component {
 
   clearAll = () => {
     this.setState({
-      todos: []
+      todos: [],
+      filter: null
     })
   }
 
@@ -90,6 +91,7 @@ class App extends React.Component {
             addTodo={this.addTodo}
             changeInput={this.changeInput}
             text={text}
+            clearAll={this.clearAll}
             showClearAll={todos.length > 1}
           />
           { todos.length > 1 && <Filter 
