@@ -10,22 +10,39 @@ class App extends React.Component {
     todos: [],
     text: "",
     filter: null,
-    alert: null
+    alert: null,
+    editMode: false,
+    todo: {}
   }
 
   addTodo = e => {
     e.preventDefault()
-    const { text, todos } = this.state
-    if(text.length > 0) {
-      const todo = { id: todos.length + 1, title: text, isActive: true }
 
+    const { text, todos, editMode } = this.state
+    if (text.length > 0) {
+      if (editMode) {
+        const { todos, todo, text } = this.state
+        const id = todo.id
+        this.setState({
+          todos: todos.map(todo =>
+            todo.id === id ? { ...todo, title: text } : todo
+          ),
+          editMode: false,
+          text: "",
+          todo: {},
+          alert: null
+        })
+      } else {
+        const todo = { id: todos.length + 1, title: text, isActive: true }
+
+        this.setState({
+          todos: todos.concat(todo),
+          text: ""
+        })
+      }
+    } else {
       this.setState({
-        todos: todos.concat(todo),
-        text: ''
-      })
-    } else{
-      this.setState({
-        alert: 'Please enter a title/desciption to your Todo'
+        alert: "Please enter a title/desciption to your Todo"
       })
     }
   }
@@ -48,7 +65,7 @@ class App extends React.Component {
     })
   }
 
-  changeFilter = (filter) => {
+  changeFilter = filter => {
     this.setState({
       filter
     })
@@ -61,7 +78,7 @@ class App extends React.Component {
     })
   }
 
-  deleteTodo = (id) => {
+  deleteTodo = id => {
     const { todos } = this.state
 
     this.setState({
@@ -69,9 +86,22 @@ class App extends React.Component {
     })
   }
 
+  setEditMode = id => {
+    const { todos } = this.state
+    const todo = todos.filter(todo => todo.id === id)[0]
+
+    this.setState({
+      todo,
+      text: todo.title,
+      editMode: true
+    })
+  }
+
   filterTodos = () => {
     const { todos, filter } = this.state
-    return (filter === null) ? todos : todos.filter(todo => todo.isActive === filter)
+    return filter === null
+      ? todos
+      : todos.filter(todo => todo.isActive === filter)
   }
 
   viewAllTodos = () => {
@@ -81,7 +111,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { todos, text, filter, alert } = this.state
+    const { todos, text, filter, alert, editMode } = this.state
+    console.log(this.state)
     return (
       <div className="App">
         <div className="container">
@@ -93,16 +124,20 @@ class App extends React.Component {
             text={text}
             clearAll={this.clearAll}
             showClearAll={todos.length > 1}
+            editMode={editMode}
           />
-          { todos.length > 1 && <Filter 
-            viewAllTodos={this.viewAllTodos} 
-            filter={filter} 
-            changeFilter={this.changeFilter}
-          />}
-          <TodoList 
-            todos={this.filterTodos()} 
-            toogleStatus={this.toogleStatus} 
+          {todos.length > 1 && (
+            <Filter
+              viewAllTodos={this.viewAllTodos}
+              filter={filter}
+              changeFilter={this.changeFilter}
+            />
+          )}
+          <TodoList
+            todos={this.filterTodos()}
+            toogleStatus={this.toogleStatus}
             deleteTodo={this.deleteTodo}
+            setEditMode={this.setEditMode}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react"
 
-const TodoItem = ({ todo, toogleStatus, deleteTodo }) => {
+const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
   return (
     <div className="todo-item">
       <h2>{todo.title}</h2>
@@ -11,10 +11,18 @@ const TodoItem = ({ todo, toogleStatus, deleteTodo }) => {
       )}
       <div className="actions">
         <button onClick={() => toogleStatus(todo.id)}>
-       
-          {todo.isActive ?  <i className="fas fa-exclamation"></i> : <i className="fas fa-check-circle"></i> }
+          {todo.isActive ? (
+            <i className="fas fa-exclamation"></i>
+          ) : (
+            <i className="fas fa-check-circle"></i>
+          )}
         </button>
-        <button onClick={() => deleteTodo(todo.id)}><i className="fas fa-trash-alt"></i></button>
+        <button onClick={() => deleteTodo(todo.id)}>
+          <i className="fas fa-trash-alt"></i>
+        </button>
+        <button onClick={() => setEditMode(todo.id)}>
+          <i class="far fa-edit"></i>
+        </button>
       </div>
     </div>
   )

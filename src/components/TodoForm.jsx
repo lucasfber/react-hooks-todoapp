@@ -1,6 +1,14 @@
 import React from "react"
 
-const TodoForm = ({ addTodo, changeInput, text, alert, showClearAll, clearAll }) => {
+const TodoForm = ({
+  addTodo,
+  changeInput,
+  text,
+  alert,
+  showClearAll,
+  clearAll,
+  editMode
+}) => {
   return (
     <div>
       {showClearAll && <button onClick={clearAll}>Clear All Todos</button>}
@@ -12,10 +20,13 @@ const TodoForm = ({ addTodo, changeInput, text, alert, showClearAll, clearAll })
           value={text}
           onChange={changeInput}
         />
-        <button type="submit">Add</button>
+        {editMode ? (
+          <button type="submit">Edit</button>
+        ) : (
+          <button type="submit">Add</button>
+        )}
       </form>
     </div>
-    
   )
 }
 
