@@ -38,10 +38,6 @@ class App extends React.Component {
     })
   }
 
-  viewAllTodos = () => {
-    return this.state.todos
-  }
-
   toogleStatus = id => {
     const { todos } = this.state
 
@@ -55,6 +51,12 @@ class App extends React.Component {
   changeFilter = (filter) => {
     this.setState({
       filter
+    })
+  }
+
+  clearAll = () => {
+    this.setState({
+      todos: []
     })
   }
 
@@ -88,6 +90,7 @@ class App extends React.Component {
             addTodo={this.addTodo}
             changeInput={this.changeInput}
             text={text}
+            showClearAll={todos.length > 1}
           />
           { todos.length > 1 && <Filter 
             viewAllTodos={this.viewAllTodos} 
@@ -95,7 +98,8 @@ class App extends React.Component {
             changeFilter={this.changeFilter}
           />}
           <TodoList 
-            todos={this.filterTodos()} toogleStatus={this.toogleStatus} 
+            todos={this.filterTodos()} 
+            toogleStatus={this.toogleStatus} 
             deleteTodo={this.deleteTodo}
           />
         </div>
