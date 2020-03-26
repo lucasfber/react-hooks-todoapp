@@ -1,8 +1,9 @@
 import React from "react"
 
-const TodoForm = ({ addTodo, changeInput, text }) => {
+const TodoForm = ({ addTodo, changeInput, text, alert }) => {
   return (
     <form onSubmit={addTodo}>
+      {alert && <p>{alert}</p>}
       <input
         type="text"
         placeholder="TodoForm"

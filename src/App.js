@@ -7,30 +7,39 @@ import Filter from "./components/Filter"
 
 class App extends React.Component {
   state = {
-    todos: [
-      { id: 1, title: "Do something", isActive: true },
-      { id: 2, title: "Stay at home", isActive: false },
-      { id: 3, title: "To practice React", isActive: true }
-    ],
-    text: ""
+    todos: [],
+    text: "",
+    filter: null,
+    alert: null
   }
 
   addTodo = e => {
     e.preventDefault()
     const { text, todos } = this.state
-    const todo = { id: todos.length + 1, title: text, isActive: true }
+    if(text.length > 0) {
+      const todo = { id: todos.length + 1, title: text, isActive: true }
 
-    console.log("todo", todo)
-    this.setState({
-      todos: todos.concat([todo])
-    })
+      this.setState({
+        todos: todos.concat(todo),
+        text: ''
+      })
+    } else{
+      this.setState({
+        alert: 'Please enter a title/desciption to your Todo'
+      })
+    }
   }
 
   changeInput = e => {
     this.setState({
       ...this.state,
-      text: e.target.value
+      text: e.target.value,
+      alert: null
     })
+  }
+
+  viewAllTodos = () => {
+    return this.state.todos
   }
 
   toogleStatus = id => {
@@ -43,21 +52,52 @@ class App extends React.Component {
     })
   }
 
-  render() {
-    const { todos, text } = this.state
+  changeFilter = (filter) => {
+    this.setState({
+      filter
+    })
+  }
 
-    console.log("todo = ", text)
+  deleteTodo = (id) => {
+    const { todos } = this.state
+
+    this.setState({
+      todos: todos.filter(todo => todo.id !== id)
+    })
+  }
+
+  filterTodos = () => {
+    const { todos, filter } = this.state
+    return (filter === null) ? todos : todos.filter(todo => todo.isActive === filter)
+  }
+
+  viewAllTodos = () => {
+    this.setState({
+      filter: null
+    })
+  }
+
+  render() {
+    const { todos, text, filter, alert } = this.state
     return (
       <div className="App">
         <div className="container">
           <h1>Todo App</h1>
           <TodoForm
+            alert={alert}
             addTodo={this.addTodo}
             changeInput={this.changeInput}
             text={text}
           />
-          <Filter />
-          <TodoList todos={todos} toogleStatus={this.toogleStatus} />
+          { todos.length > 1 && <Filter 
+            viewAllTodos={this.viewAllTodos} 
+            filter={filter} 
+            changeFilter={this.changeFilter}
+          />}
+          <TodoList 
+            todos={this.filterTodos()} toogleStatus={this.toogleStatus} 
+            deleteTodo={this.deleteTodo}
+          />
         </div>
       </div>
     )
