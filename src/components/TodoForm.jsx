@@ -15,6 +15,7 @@ const TodoForm = ({
         {alert && <p className="alert">{alert}</p>}
         <input
           type="text"
+          className="todo-text"
           placeholder="What needs to be done?"
           value={text}
           onChange={changeInput}

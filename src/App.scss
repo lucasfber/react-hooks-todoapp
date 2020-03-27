@@ -95,7 +95,7 @@ $blue: #3498db;
 
 /* === TODO FORM */
 .todo-form {
-  input[type="text"] {
+  .todo-text {
     padding: 1rem ;
     font-size: 2rem;
     color: $secondary-color;
@@ -141,7 +141,7 @@ $blue: #3498db;
 
 /* === FILTER === */
 .filter {
-  margin: 2rem 0;
+  margin-top: 2rem;
   text-align: center;
   padding: 1rem;
   font-size: 1.3rem;
@@ -158,7 +158,7 @@ $blue: #3498db;
 
 /* === TODO-LIST === */
 .todo-list {
-  
+  margin-top: 2rem;  
 
   ul {
     max-height: 25.8rem;
@@ -192,6 +192,75 @@ $blue: #3498db;
       }
     }
   }
+}
 
+/* === TABLET === */
+@media screen and (min-width: 768px) {
+  .btn--circle {
+    width: 3.4rem;
+    height: 3.4rem;
 
+    i {
+      font-size: 1.6rem;
+    }
+  }
+
+  .container {
+    width: 75%;
+  }
+
+  .todo-form {
+    .todo-text {
+      font-size: 2.4rem;
+    }
+
+    .btn--primary {
+      font-size: 1.8rem;
+    }
+
+    .btn-clear {
+      font-size: 1.8rem;
+    }
+    
+    .alert {
+      font-size: 1.6rem;
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  .filter {
+    font-size: 1.7rem;
+    .selected {
+      font-size: 1.8rem;
+    }
+  }
+
+  .todo-list {
+    ul {
+      max-height: 38.5rem;
+    }
+  }
+
+  .todo-item {
+
+    .todo--title {
+      max-width: 45rem;
+      margin-right: 1rem;
+
+      h3 {
+        word-break: break-all;
+        font-size: 2rem;
+      }
+    }
+
+    .actions {
+      button {
+        margin-right: .6rem;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
