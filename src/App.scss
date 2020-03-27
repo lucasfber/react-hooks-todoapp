@@ -1,0 +1,197 @@
+$primary-color: #222;
+$secondary-color: #777;
+$grey: #2a2a2a;
+$main-purple: #85e;
+$green: #2ecc71;
+$red: #e74c3c;
+$blue: #3498db;
+
+.active {
+  color: $green;
+}
+
+.done {
+  color: $red;
+}
+
+.btn {
+  padding: 1rem;
+  background-color: $grey;
+  color: $secondary-color;
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 400ms ease-out;
+}
+
+.btn-active {
+  &:hover {
+    border: 1px solid $green;
+  }
+}
+
+.btn-done {
+  &:hover {
+    border: 1px solid $red;
+  }
+}
+
+.btn-edit {
+  margin-right: .3rem;
+  &:hover {
+    border: 1px solid $main-purple;
+    color: $main-purple;
+  }
+}
+
+.btn-delete {
+  &:hover {
+    border: 1px solid $red;
+    color: $red;
+
+  }
+}
+
+.btn--primary {
+  background-color: $main-purple;
+  color: #fff;
+}
+
+.btn--circle {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.btn--large {
+  width: 100%;
+}
+
+.App {
+  background-color: $primary-color;
+  color: #fff;
+  padding: 1.6rem 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 1.6rem 0;
+  width: 90%;
+}
+
+/* === TODO FORM */
+.todo-form {
+  input[type="text"] {
+    padding: 1rem ;
+    font-size: 2rem;
+    color: $secondary-color;
+    width: 100%;
+    border: none;
+    background-color: $primary-color;
+    outline: none;
+    border-bottom: 1px solid $secondary-color;
+    margin-bottom: 1rem;
+
+    &:focus {
+      border-bottom: 2px solid $secondary-color
+    }
+  }
+
+  .alert {
+    color: $red;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .btn--primary {
+    transition: all .2s ease;
+
+    &:hover {
+      background-color: lighten($main-purple, 5%);
+      color: #fff;
+    }
+  }
+
+  .btn-clear {
+    margin-top: 1rem;
+    background-color: #3d3d3d;
+    color: #7c7c7c;
+    //transition: all .2s ease;
+
+    &:hover {
+      background-color: lighten(#3d3d3d, 4%);
+      color: #eee;
+    }
+  }
+}
+
+/* === FILTER === */
+.filter {
+  margin: 2rem 0;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.3rem;
+
+  .selected {
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+
+  span {
+    cursor: pointer;
+  }
+}
+
+/* === TODO-LIST === */
+.todo-list {
+  
+
+  ul {
+    max-height: 25.8rem;
+    overflow: auto;
+  }
+}
+
+/* === TODO-ITEM === */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 1rem 0;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid $secondary-color;
+
+  .todo--title {
+    /* border: 1px solid blue; */
+    flex: 1 0 0;
+    text-align: center;
+    max-width: 187px;
+    
+
+    h3 {
+      width: 100%;
+      font-size: 1.6rem;
+
+      &.done {
+        text-decoration: line-through;
+        color: #7c7c7c;
+      }
+    }
+  }
+
+
+}

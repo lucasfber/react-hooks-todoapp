@@ -1,5 +1,5 @@
 import React from "react"
-import "./App.css"
+import "./App.scss"
 
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
@@ -42,7 +42,7 @@ class App extends React.Component {
       }
     } else {
       this.setState({
-        alert: "Please enter a title/desciption to your Todo"
+        alert: "Please enter a title/description to your Todo!"
       })
     }
   }
@@ -112,11 +112,9 @@ class App extends React.Component {
 
   render() {
     const { todos, text, filter, alert, editMode } = this.state
-    console.log(this.state)
     return (
       <div className="App">
         <div className="container">
-          <h1>Todo App</h1>
           <TodoForm
             alert={alert}
             addTodo={this.addTodo}

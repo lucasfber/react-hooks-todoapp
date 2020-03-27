@@ -10,20 +10,28 @@ const TodoForm = ({
   editMode
 }) => {
   return (
-    <div>
-      {showClearAll && <button onClick={clearAll}>Clear All Todos</button>}
+    <div className="todo-form">
       <form onSubmit={addTodo}>
-        {alert && <p>{alert}</p>}
+        {alert && <p className="alert">{alert}</p>}
         <input
           type="text"
-          placeholder="TodoForm"
+          placeholder="What needs to be done?"
           value={text}
           onChange={changeInput}
         />
         {editMode ? (
-          <button type="submit">Edit</button>
+          <button className="btn btn--primary btn--large" type="submit">
+            Edit
+          </button>
         ) : (
-          <button type="submit">Add</button>
+          <button className="btn btn--primary btn--large" type="submit">
+            Add
+          </button>
+        )}
+        {showClearAll && (
+          <button className="btn btn-clear btn--large" onClick={clearAll}>
+            Clear All Todos
+          </button>
         )}
       </form>
     </div>
