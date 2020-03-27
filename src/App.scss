@@ -237,7 +237,7 @@ $blue: #3498db;
 
   .todo-list {
     ul {
-      max-height: 38.5rem;
+      max-height: 71.5rem;
     }
   }
 
@@ -245,7 +245,7 @@ $blue: #3498db;
 
     .todo--title {
       max-width: 45rem;
-      margin-right: 1rem;
+      margin: 0 3rem;
 
       h3 {
         word-break: break-all;
@@ -261,6 +261,35 @@ $blue: #3498db;
           margin: 0;
         }
       }
+    }
+  }
+}
+
+/* === DESKTOP === */
+@media screen and (min-width: 1280px) {
+  .App {
+    padding: 3.2rem 0;
+  }
+
+  .container {
+    max-width: 90rem;
+  }
+
+  .todo-form {
+    .btn--primary {
+      display: none;
+    }
+  }
+
+  .todo-list {
+    ul {
+      max-height: initial;
+    }
+  }
+
+  .todo-item {
+    .todo--title {
+      max-width: 70rem;
     }
   }
 }

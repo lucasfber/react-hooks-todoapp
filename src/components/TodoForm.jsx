@@ -16,7 +16,7 @@ const TodoForm = ({
         <input
           type="text"
           className="todo-text"
-          placeholder="What needs to be done?"
+          placeholder="Type your Todo and press 'Enter' or 'Add'"
           value={text}
           onChange={changeInput}
         />

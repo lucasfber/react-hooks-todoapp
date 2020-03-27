@@ -19,6 +19,7 @@ const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
               : `btn btn--circle btn-done`
           }
           onClick={() => toogleStatus(todo.id)}
+          title="Toggle Status"
         >
           {todo.isActive ? (
             <i className="fas fa-check-circle active"></i>
@@ -28,12 +29,14 @@ const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
         </button>
         <button
           className="btn btn-edit btn--circle"
+          title="Edit Todo"
           onClick={() => setEditMode(todo.id)}
         >
           <i className="far fa-edit"></i>
         </button>
         <button
           className="btn btn-delete btn--circle"
+          title="Delete Todo"
           onClick={() => deleteTodo(todo.id)}
         >
           <i className="fas fa-trash-alt"></i>
