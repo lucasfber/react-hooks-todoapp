@@ -1,146 +1,115 @@
-import React from "react"
+import React, { useState } from "react"
 import "./App.scss"
 
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
 import Filter from "./components/Filter"
 
-class App extends React.Component {
-  state = {
-    todos: [],
-    text: "",
-    filter: null,
-    alert: null,
-    editMode: false,
-    todo: {}
-  }
+const App = () => {
+  const [todos, setTodos] = useState([])
+  const [text, setText] = useState("")
+  const [filter, setFilter] = useState(null)
+  const [alert, setAlert] = useState(null)
+  const [editMode, setEditMode] = useState(false)
+  const [todo, setTodo] = useState({})
 
-  addTodo = e => {
+  const addTodo = e => {
     e.preventDefault()
 
-    const { text, todos, editMode } = this.state
     if (text.length > 0) {
       if (editMode) {
-        const { todos, todo, text } = this.state
         const id = todo.id
-        this.setState({
-          todos: todos.map(todo =>
-            todo.id === id ? { ...todo, title: text } : todo
-          ),
-          editMode: false,
-          text: "",
-          todo: {},
-          alert: null
-        })
+
+        setTodos(
+          todos.map(todo => (todo.id === id ? { ...todo, title: text } : todo))
+        )
+
+        setEditMode(false)
+        setText("")
+        setTodo({})
+        setAlert(null)
       } else {
         const todo = { id: todos.length + 1, title: text, isActive: true }
-
-        this.setState({
-          todos: todos.concat(todo),
-          text: ""
-        })
+        setTodos(todos.concat(todo))
+        setText("")
       }
     } else {
-      this.setState({
-        alert: "Please enter a title/description to your Todo!"
-      })
+      setAlert("Please enter a title/description to your Todo!")
     }
   }
 
-  changeInput = e => {
-    this.setState({
-      ...this.state,
-      text: e.target.value,
-      alert: null
-    })
+  const changeInput = e => {
+    setText(e.target.value)
+    setAlert(null)
   }
 
-  toogleStatus = id => {
-    const { todos } = this.state
-
-    this.setState({
-      todos: todos.map(todo =>
+  const toogleStatus = id => {
+    setTodos(
+      todos.map(todo =>
         todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
       )
-    })
+    )
   }
 
-  changeFilter = filter => {
-    this.setState({
-      filter
-    })
+  const changeFilter = filter => {
+    setFilter(filter)
   }
 
-  clearAll = () => {
-    this.setState({
-      todos: [],
-      filter: null
-    })
+  const clearAll = () => {
+    setTodos([])
+    setFilter(null)
   }
 
-  deleteTodo = id => {
-    const { todos } = this.state
-
-    this.setState({
-      todos: todos.filter(todo => todo.id !== id)
-    })
+  const deleteTodo = id => {
+    setTodos(todos.filter(todo => todo.id !== id))
   }
 
-  setEditMode = id => {
-    const { todos } = this.state
+  const changeEditMode = id => {
     const todo = todos.filter(todo => todo.id === id)[0]
 
-    this.setState({
-      todo,
-      text: todo.title,
-      editMode: true
-    })
+    setTodo(todo)
+    setText(todo.title)
+    setEditMode(true)
   }
 
-  filterTodos = () => {
-    const { todos, filter } = this.state
+  const filterTodos = () => {
     return filter === null
       ? todos
       : todos.filter(todo => todo.isActive === filter)
   }
 
-  viewAllTodos = () => {
-    this.setState({
-      filter: null
-    })
+  const viewAllTodos = () => {
+    setFilter(null)
   }
 
-  render() {
-    const { todos, text, filter, alert, editMode } = this.state
-    return (
-      <div className="App">
-        <div className="container">
-          <TodoForm
-            alert={alert}
-            addTodo={this.addTodo}
-            changeInput={this.changeInput}
-            text={text}
-            clearAll={this.clearAll}
-            showClearAll={todos.length > 1}
-            editMode={editMode}
+  return (
+    <div className="App">
+      <div className="container">
+        <TodoForm
+          alert={alert}
+          addTodo={addTodo}
+          changeInput={changeInput}
+          text={text}
+          clearAll={clearAll}
+          showClearAll={todos.length > 1}
+          editMode={editMode}
+        />
+        {todos.length > 1 && (
+          <Filter
+            viewAllTodos={viewAllTodos}
+            filter={filter}
+            changeFilter={changeFilter}
           />
-          {todos.length > 1 && (
-            <Filter
-              viewAllTodos={this.viewAllTodos}
-              filter={filter}
-              changeFilter={this.changeFilter}
-            />
-          )}
-          <TodoList
-            todos={this.filterTodos()}
-            toogleStatus={this.toogleStatus}
-            deleteTodo={this.deleteTodo}
-            setEditMode={this.setEditMode}
-          />
-        </div>
+        )}
+        <TodoList
+          todos={filterTodos()}
+          toogleStatus={toogleStatus}
+          deleteTodo={deleteTodo}
+          setEditMode={changeEditMode}
+        />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App
