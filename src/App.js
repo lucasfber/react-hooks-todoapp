@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./App.scss"
 
 import TodoForm from "./components/TodoForm"
@@ -12,6 +12,13 @@ const App = () => {
   const [alert, setAlert] = useState(null)
   const [editMode, setEditMode] = useState(false)
   const [todo, setTodo] = useState({})
+  const [placeholderText, setPlaceholderText] = useState("")
+
+  useEffect(() => {
+    getInnerWidth() > 1279
+      ? setPlaceholderText("Type your 'TODO' and press 'Enter'")
+      : setPlaceholderText("What needs to be done?")
+  }, [])
 
   const addTodo = e => {
     e.preventDefault()
@@ -36,6 +43,10 @@ const App = () => {
     } else {
       setAlert("Please enter a title/description to your Todo!")
     }
+  }
+
+  const getInnerWidth = () => {
+    return window.innerWidth
   }
 
   const changeInput = e => {
@@ -93,6 +104,7 @@ const App = () => {
           clearAll={clearAll}
           showClearAll={todos.length > 1}
           editMode={editMode}
+          placeholderText={placeholderText}
         />
         {todos.length > 1 && (
           <Filter

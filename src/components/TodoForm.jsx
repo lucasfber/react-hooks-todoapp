@@ -7,7 +7,8 @@ const TodoForm = ({
   alert,
   showClearAll,
   clearAll,
-  editMode
+  editMode,
+  placeholderText
 }) => {
   return (
     <div className="todo-form">
@@ -16,7 +17,7 @@ const TodoForm = ({
         <input
           type="text"
           className="todo-text"
-          placeholder="Type your Todo and press 'Enter' or 'Add'"
+          placeholder={placeholderText}
           value={text}
           onChange={changeInput}
         />
