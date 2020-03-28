@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Fragment } from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.scss"
 
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
 import Filter from "./components/Filter"
+
+import About from "./pages/About"
+import Navbar from "./components/Navbar"
 
 const App = () => {
   const [todos, setTodos] = useState([])
@@ -94,33 +98,47 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <div className="container">
-        <TodoForm
-          alert={alert}
-          addTodo={addTodo}
-          changeInput={changeInput}
-          text={text}
-          clearAll={clearAll}
-          showClearAll={todos.length > 1}
-          editMode={editMode}
-          placeholderText={placeholderText}
-        />
-        {todos.length > 1 && (
-          <Filter
-            viewAllTodos={viewAllTodos}
-            filter={filter}
-            changeFilter={changeFilter}
-          />
-        )}
-        <TodoList
-          todos={filterTodos()}
-          toogleStatus={toogleStatus}
-          deleteTodo={deleteTodo}
-          setEditMode={changeEditMode}
-        />
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Fragment>
+                  <TodoForm
+                    alert={alert}
+                    addTodo={addTodo}
+                    changeInput={changeInput}
+                    text={text}
+                    clearAll={clearAll}
+                    showClearAll={todos.length > 1}
+                    editMode={editMode}
+                    placeholderText={placeholderText}
+                  />
+                  {todos.length > 1 && (
+                    <Filter
+                      viewAllTodos={viewAllTodos}
+                      filter={filter}
+                      changeFilter={changeFilter}
+                    />
+                  )}
+                  <TodoList
+                    todos={filterTodos()}
+                    toogleStatus={toogleStatus}
+                    deleteTodo={deleteTodo}
+                    setEditMode={changeEditMode}
+                  />
+                </Fragment>
+              )}
+            />
+            <Route exact path="/about" component={About} />
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   )
 }
 

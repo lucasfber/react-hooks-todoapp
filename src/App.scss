@@ -78,23 +78,91 @@ $blue: #3498db;
   width: 100%;
 }
 
-.App {
-  background-color: $primary-color;
-  color: #fff;
-  padding: 1.6rem 0;
-  width: 100%;
-  min-height: 100vh;
-  height: 100%;
-}
-
 .container {
   margin: 0 auto;
   padding: 1.6rem 0;
   width: 90%;
 }
 
+.App {
+  background-color: $primary-color;
+  color: #fff;
+  padding-bottom: 1.6rem;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%; 
+}
+
+
+
+/* === NAVBAR === */
+.navbar {
+  background-color: $primary-color;
+  background-color: lighten($primary-color, 2%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 4.8rem;
+  z-index: 333;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(255,255,255, 0.2);
+
+  .btn-menu {
+    /* <i class="fas fa-times"></i> */
+    //background-color: darken($primary-color, 1%);
+    border: 1px solid rgba(255,255,255, 0.2);
+    position: relative;
+    right: 0;
+  }
+
+  .nav-list {
+    background-color: lighten($primary-color, 2%);
+    border: 1px solid rgba(255,255,255, 0.1);
+    border-top: none;
+    position: fixed;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    height: 10rem;
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 222;
+    transition: transform 650ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+
+    &.open {
+      transform: scaleY(1);
+    }
+
+    li {
+      display: block;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    a {
+      color: $secondary-color;
+      font-size: 1.4rem;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+  
+}
+
 /* === TODO FORM */
 .todo-form {
+  margin-top: 6rem;
   .todo-text {
     padding: 1rem ;
     font-size: 2rem;
@@ -269,6 +337,39 @@ $blue: #3498db;
 @media screen and (min-width: 1280px) {
   .App {
     padding: 3.2rem 0;
+  }
+
+  .navbar {
+    justify-content: flex-end;
+    padding: 1rem 3.2rem;
+    height: 5.4rem;
+    background-color: lighten($primary-color, 2%);
+    .btn-menu {
+      display: none;
+    }
+
+    .nav-list {
+      border: none;
+      background: initial;
+      display: flex;
+      flex-direction: row;
+      position: initial;
+      transform: initial;
+      height: 100%;
+      justify-content: space-around;
+
+      li {
+        margin: 0 2rem;
+      }
+
+      a {
+        transition: color .2s ease-in-out;
+
+        font-size: 1.6rem;
+      }
+    }
+
+    
   }
 
   .container {
