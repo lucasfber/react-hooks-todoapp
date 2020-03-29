@@ -17,6 +17,7 @@ const App = () => {
   const [editMode, setEditMode] = useState(false)
   const [todo, setTodo] = useState({})
   const [placeholderText, setPlaceholderText] = useState("")
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     getInnerWidth() > 1279
@@ -71,6 +72,7 @@ const App = () => {
   }
 
   const clearAll = () => {
+    setShowModal(true)
     setTodos([])
     setFilter(null)
   }
@@ -117,6 +119,8 @@ const App = () => {
                     showClearAll={todos.length > 1}
                     editMode={editMode}
                     placeholderText={placeholderText}
+                    setShowModal={setShowModal}
+                    showModal={showModal}
                   />
                   {todos.length > 1 && (
                     <Filter

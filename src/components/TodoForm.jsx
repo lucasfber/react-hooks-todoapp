@@ -1,4 +1,5 @@
 import React from "react"
+import Modal from "./Modal"
 
 const TodoForm = ({
   addTodo,
@@ -8,10 +9,20 @@ const TodoForm = ({
   showClearAll,
   clearAll,
   editMode,
-  placeholderText
+  placeholderText,
+  showModal,
+  setShowModal
 }) => {
   return (
     <div className="todo-form">
+      <Modal
+        showModal={showModal}
+        handleConfirm={() => {
+          clearAll()
+          setShowModal(false)
+        }}
+        handleDeny={setShowModal}
+      />
       <form onSubmit={addTodo}>
         {alert && <p className="alert">{alert}</p>}
         <input
@@ -31,7 +42,11 @@ const TodoForm = ({
           </button>
         )}
         {showClearAll && (
-          <button className="btn btn-clear btn--large" onClick={clearAll}>
+          <button
+            type="button"
+            className="btn btn-clear btn--large"
+            onClick={() => setShowModal(true)}
+          >
             Clear All Todos
           </button>
         )}

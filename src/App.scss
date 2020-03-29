@@ -93,7 +93,55 @@ $blue: #3498db;
   height: 100%; 
 }
 
+/* === MODAL === */
+.modal { 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($primary-color, 0.7);
+  z-index: 1200;
+  display: none;
+  align-items: center;
+  justify-content: center;
 
+  &.show {
+    display: flex;
+  }
+  
+  .modal__content {
+   background-color: $primary-color;
+   border: 1px solid $secondary-color;
+   border-radius: .3rem;
+   padding: 1rem 1.6rem;
+   width: 75%;
+
+    .modal__title {
+      font-size: 1.8rem;
+    }
+
+    .modal__body {
+      margin-top: 1rem;
+      padding-bottom: .5rem;
+    }
+
+    .modal__footer {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      padding: 0.8rem;
+      margin-left: 1rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}
 
 /* === NAVBAR === */
 .navbar {
@@ -275,6 +323,35 @@ $blue: #3498db;
 
   .container {
     width: 75%;
+  }
+
+  .modal {
+
+    .modal__content {
+      padding: 1.6rem;
+
+      .modal__title {
+        font-size: 2.2rem;
+      }
+
+      .modal__body {
+        margin-top: 2rem;
+      }
+
+      .modal__footer {
+        border-top: 1px solid rgba(white, 0.2);
+        padding-top: 1.5rem;
+        margin-top: 2.5rem;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        font-size: 1.4rem;
+      }
+    }
   }
 
   .todo-form {
