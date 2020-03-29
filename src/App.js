@@ -126,7 +126,6 @@ const App = () => {
                     addTodo={addTodo}
                     changeInput={changeInput}
                     text={text}
-                    clearAll={clearAll}
                     showClearAll={todos.length > 1}
                     editMode={editMode}
                     placeholderText={placeholderText}

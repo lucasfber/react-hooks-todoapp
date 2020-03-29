@@ -6,22 +6,12 @@ const TodoForm = ({
   text,
   alert,
   showClearAll,
-  clearAll,
   editMode,
   placeholderText,
-  showModal,
   setShowModalClearAll
 }) => {
   return (
     <div className="todo-form">
-      {/*       <Modal
-        showModal={showModal}
-        handleConfirm={() => {
-          clearAll()
-          setShowModal(false)
-        }}
-        handleDeny={setShowModal}
-      /> */}
       <form onSubmit={addTodo}>
         {alert && <p className="alert">{alert}</p>}
         <input
