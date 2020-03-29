@@ -1,38 +1,29 @@
 import React, { useEffect } from "react"
 
-const Modal = ({ handleConfirm, handleDeny, showModal }) => {
-  const disposeModal = event => {
-    if (event.keyCode === 27) {
-      handleDeny(false)
-    }
-  }
-
+const Modal = ({ title, text, onDeny, onAccept }) => {
   useEffect(() => {
-    document.addEventListener("keydown", disposeModal, false)
+    document.addEventListener("keydown", onDeny, false)
 
     return () => {
-      document.removeEventListener("keydown", disposeModal, false)
+      document.removeEventListener("keydown", onDeny, false)
     }
     /* eslint-disable-next-line */
   }, [])
 
   return (
-    <div
-      className={showModal ? `modal show` : `modal`}
-      onKeyUp={() => console.log("Funciona aqui?")}
-    >
+    <div className="modal">
       <div className="modal__content ">
         <div className="modal__header">
-          <h2 className="modal__title">Clear All?</h2>
+          <h2 className="modal__title">{title}</h2>
         </div>
         <div className="modal__body">
-          <p>Do you want to clear all todos?</p>
+          <p>{text}</p>
         </div>
         <div className="modal__footer">
-          <button className="btn btn--primary" onClick={() => handleConfirm()}>
+          <button className="btn btn--primary" onClick={onAccept}>
             Yes!
           </button>
-          <button className="btn" onClick={() => handleDeny(false)}>
+          <button className="btn" onClick={onDeny}>
             No, I don't!
           </button>
         </div>

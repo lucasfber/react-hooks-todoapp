@@ -6,11 +6,6 @@ const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
       <div className="todo--title">
         <h3 className={todo.isActive ? `` : `done`}>{todo.title}</h3>
       </div>
-      {/* todo.isActive ? (
-        <p className="active">Active</p>
-      ) : (
-        <p className="done">Completed</p>
-      ) */}
       <div className="actions">
         <button
           className={

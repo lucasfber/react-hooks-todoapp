@@ -8,6 +8,7 @@ import Filter from "./components/Filter"
 
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
+import Modal from "./components/Modal"
 
 const App = () => {
   const [todos, setTodos] = useState([])
@@ -17,7 +18,8 @@ const App = () => {
   const [editMode, setEditMode] = useState(false)
   const [todo, setTodo] = useState({})
   const [placeholderText, setPlaceholderText] = useState("")
-  const [showModal, setShowModal] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
+  const [showModalClearAll, setShowModalClearAll] = useState(false)
 
   useEffect(() => {
     getInnerWidth() > 1279
@@ -72,12 +74,13 @@ const App = () => {
   }
 
   const clearAll = () => {
-    setShowModal(true)
+    setShowModalClearAll(false)
     setTodos([])
     setFilter(null)
   }
 
   const deleteTodo = id => {
+    console.log("to chamando?", id)
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
@@ -110,6 +113,14 @@ const App = () => {
               path="/"
               render={() => (
                 <Fragment>
+                  {showModalClearAll && (
+                    <Modal
+                      title="Cler All?"
+                      text="Do you want clear all todos?"
+                      onAccept={clearAll}
+                      onDeny={() => setShowModalClearAll(false)}
+                    />
+                  )}
                   <TodoForm
                     alert={alert}
                     addTodo={addTodo}
@@ -119,8 +130,7 @@ const App = () => {
                     showClearAll={todos.length > 1}
                     editMode={editMode}
                     placeholderText={placeholderText}
-                    setShowModal={setShowModal}
-                    showModal={showModal}
+                    setShowModalClearAll={setShowModalClearAll}
                   />
                   {todos.length > 1 && (
                     <Filter
@@ -129,11 +139,14 @@ const App = () => {
                       changeFilter={changeFilter}
                     />
                   )}
+
                   <TodoList
                     todos={filterTodos()}
                     toogleStatus={toogleStatus}
                     deleteTodo={deleteTodo}
                     setEditMode={changeEditMode}
+                    showModalDelete={showModalDelete}
+                    setShowModalDelete={setShowModalDelete}
                   />
                 </Fragment>
               )}
