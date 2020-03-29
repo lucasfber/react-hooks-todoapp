@@ -1,10 +1,25 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 const Modal = ({ handleConfirm, handleDeny, showModal }) => {
+  const disposeModal = event => {
+    if (event.keyCode === 27) {
+      handleDeny(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", disposeModal, false)
+
+    return () => {
+      document.removeEventListener("keydown", disposeModal, false)
+    }
+    /* eslint-disable-next-line */
+  }, [])
+
   return (
     <div
       className={showModal ? `modal show` : `modal`}
-      onClick={() => handleDeny(false)}
+      onKeyUp={() => console.log("Funciona aqui?")}
     >
       <div className="modal__content ">
         <div className="modal__header">

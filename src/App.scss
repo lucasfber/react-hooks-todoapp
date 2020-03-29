@@ -25,6 +25,11 @@ $blue: #3498db;
   font-size: 1.4rem;
   cursor: pointer;
   transition: all 400ms ease-out;
+
+  &:hover {
+    background-color: lighten($grey, 5%);
+    color: lighten($secondary-color,5%);
+  }
 }
 
 .btn-active {
@@ -246,7 +251,6 @@ $blue: #3498db;
     margin-top: 1rem;
     background-color: #3d3d3d;
     color: #7c7c7c;
-    //transition: all .2s ease;
 
     &:hover {
       background-color: lighten(#3d3d3d, 4%);
@@ -451,6 +455,17 @@ $blue: #3498db;
 
   .container {
     max-width: 90rem;
+  }
+
+  .modal {
+
+    .modal__content {
+      max-width: 80rem;
+
+      .btn--primary{
+        display: inline-block;
+      }
+    }
   }
 
   .todo-form {
