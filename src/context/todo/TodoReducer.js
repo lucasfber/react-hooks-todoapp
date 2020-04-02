@@ -9,5 +9,9 @@ export default (state, action) => {
       return {
         ...state
       }
+
+    case "TEST":
+      console.log(action.payload)
+      break
   }
 }

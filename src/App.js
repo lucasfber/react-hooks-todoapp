@@ -9,6 +9,7 @@ import Filter from "./components/Filter"
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
 import Modal from "./components/Modal"
+import TodoState from "./context/todo/TodoState"
 
 const App = () => {
   const [todos, setTodos] = useState([])
@@ -103,58 +104,60 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Fragment>
-                  {showModalClearAll && (
-                    <Modal
-                      title="Cler All?"
-                      text="Do you want clear all todos?"
-                      onAccept={clearAll}
-                      onDeny={() => setShowModalClearAll(false)}
+    <TodoState>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Fragment>
+                    {showModalClearAll && (
+                      <Modal
+                        title="Cler All?"
+                        text="Do you want clear all todos?"
+                        onAccept={clearAll}
+                        onDeny={() => setShowModalClearAll(false)}
+                      />
+                    )}
+                    <TodoForm
+                      alert={alert}
+                      addTodo={addTodo}
+                      changeInput={changeInput}
+                      text={text}
+                      showClearAll={todos.length > 1}
+                      editMode={editMode}
+                      placeholderText={placeholderText}
+                      setShowModalClearAll={setShowModalClearAll}
                     />
-                  )}
-                  <TodoForm
-                    alert={alert}
-                    addTodo={addTodo}
-                    changeInput={changeInput}
-                    text={text}
-                    showClearAll={todos.length > 1}
-                    editMode={editMode}
-                    placeholderText={placeholderText}
-                    setShowModalClearAll={setShowModalClearAll}
-                  />
-                  {todos.length > 1 && (
-                    <Filter
-                      viewAllTodos={viewAllTodos}
-                      filter={filter}
-                      changeFilter={changeFilter}
-                    />
-                  )}
+                    {todos.length > 1 && (
+                      <Filter
+                        viewAllTodos={viewAllTodos}
+                        filter={filter}
+                        changeFilter={changeFilter}
+                      />
+                    )}
 
-                  <TodoList
-                    todos={filterTodos()}
-                    toogleStatus={toogleStatus}
-                    deleteTodo={deleteTodo}
-                    setEditMode={changeEditMode}
-                    showModalDelete={showModalDelete}
-                    setShowModalDelete={setShowModalDelete}
-                  />
-                </Fragment>
-              )}
-            />
-            <Route exact path="/about" component={About} />
-          </Switch>
+                    <TodoList
+                      todos={filterTodos()}
+                      toogleStatus={toogleStatus}
+                      deleteTodo={deleteTodo}
+                      setEditMode={changeEditMode}
+                      showModalDelete={showModalDelete}
+                      setShowModalDelete={setShowModalDelete}
+                    />
+                  </Fragment>
+                )}
+              />
+              <Route exact path="/about" component={About} />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </TodoState>
   )
 }
 
