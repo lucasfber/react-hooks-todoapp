@@ -8,7 +8,6 @@ import Filter from "./components/Filter"
 
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
-import Modal from "./components/Modal"
 import TodoState from "./context/todo/TodoState"
 
 const App = () => {
@@ -74,12 +73,6 @@ const App = () => {
     setFilter(filter)
   }
 
-  const clearAll = () => {
-    setShowModalClearAll(false)
-    setTodos([])
-    setFilter(null)
-  }
-
   const deleteTodo = id => {
     console.log("to chamando?", id)
     setTodos(todos.filter(todo => todo.id !== id))
@@ -115,14 +108,6 @@ const App = () => {
                 path="/"
                 render={() => (
                   <Fragment>
-                    {showModalClearAll && (
-                      <Modal
-                        title="Cler All?"
-                        text="Do you want clear all todos?"
-                        onAccept={clearAll}
-                        onDeny={() => setShowModalClearAll(false)}
-                      />
-                    )}
                     <TodoForm
                       alert={alert}
                       addTodo={addTodo}

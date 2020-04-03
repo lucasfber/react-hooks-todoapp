@@ -1,17 +1,26 @@
 import React, { useReducer } from "react"
 
-import { TOGGLE_MODAL_DELETE, TOGGLE_MODAL_CLEAR_ALL } from "../types"
+import {
+  TOGGLE_MODAL_DELETE,
+  TOGGLE_MODAL_CLEAR_ALL,
+  CLEAR_ALL
+} from "../types"
 import TodoContext from "./TodoContext"
 import TodoReducer from "./TodoReducer"
 
 const TodoState = props => {
   const initialState = {
-    todos: [],
+    todos: ["foo", "bar"],
     isModalDeleteVisible: false,
-    isModalClearAllVisible: false
+    isModalClearAllVisible: false,
+    filter: null
   }
 
   const [state, dispatch] = useReducer(TodoReducer, initialState)
+
+  const clearAll = () => {
+    dispatch({ type: CLEAR_ALL })
+  }
 
   const toggleModalClearAll = value => {
     dispatch({ type: TOGGLE_MODAL_CLEAR_ALL, payload: value })
@@ -26,7 +35,9 @@ const TodoState = props => {
       value={{
         isModalClearAllVisible: state.isModalClearAllVisible,
         isModalDeleteVisible: state.isModalDeleteVisible,
+        filter: state.filter,
         todos: state.todos,
+        clearAll,
         toggleModalClearAll,
         toggleModalDelete
       }}

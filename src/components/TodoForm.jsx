@@ -13,7 +13,7 @@ const TodoForm = ({
   placeholderText
 }) => {
   const context = useContext(TodoContext)
-  const { isModalClearAllVisible, toggleModalClearAll } = context
+  const { clearAll, isModalClearAllVisible, toggleModalClearAll } = context
 
   return (
     <div className="todo-form">
@@ -21,7 +21,7 @@ const TodoForm = ({
         <Modal
           title="Cler All?"
           text="Do you want clear all todos?"
-          onAccept={() => console.log("clearAll")}
+          onAccept={clearAll}
           onDeny={() => toggleModalClearAll(false)}
         />
       )}
