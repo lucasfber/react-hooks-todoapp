@@ -1,4 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
+import TodoContext from "../context/todo/TodoContext"
+
+import Modal from "../components/Modal"
 
 const TodoForm = ({
   addTodo,
@@ -7,11 +10,21 @@ const TodoForm = ({
   alert,
   showClearAll,
   editMode,
-  placeholderText,
-  setShowModalClearAll
+  placeholderText
 }) => {
+  const context = useContext(TodoContext)
+  const { isModalClearAllVisible, toggleModalClearAll } = context
+
   return (
     <div className="todo-form">
+      {isModalClearAllVisible && (
+        <Modal
+          title="Cler All?"
+          text="Do you want clear all todos?"
+          onAccept={() => console.log("clearAll")}
+          onDeny={() => toggleModalClearAll(false)}
+        />
+      )}
       <form onSubmit={addTodo}>
         {alert && <p className="alert">{alert}</p>}
         <input
@@ -34,7 +47,7 @@ const TodoForm = ({
           <button
             type="button"
             className="btn btn-clear btn--large"
-            onClick={() => setShowModalClearAll(true)}
+            onClick={() => toggleModalClearAll(true)}
           >
             Clear All Todos
           </button>
