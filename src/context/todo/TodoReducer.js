@@ -4,7 +4,8 @@ import {
   SET_FILTER,
   TOGGLE_MODAL_CLEAR_ALL,
   TOGGLE_MODAL_DELETE,
-  SET_TEXT
+  TOGGLE_TODO_STATUS,
+  SET_TEXT,
 } from "../types.js"
 
 export default (state, action) => {
@@ -16,7 +17,7 @@ export default (state, action) => {
       return {
         ...state,
         text: "",
-        todos: action.payload
+        todos: action.payload,
       }
 
     case CLEAR_ALL:
@@ -24,31 +25,37 @@ export default (state, action) => {
         ...state,
         todos: [],
         isModalClearAllVisible: false,
-        filer: null
+        filer: null,
       }
 
     case SET_FILTER:
       return {
         ...state,
-        filter: action.payload
+        filter: action.payload,
       }
 
     case SET_TEXT:
       return {
         ...state,
-        text: action.payload
+        text: action.payload,
+      }
+
+    case TOGGLE_TODO_STATUS:
+      return {
+        ...state,
+        todos: action.payload,
       }
 
     case TOGGLE_MODAL_CLEAR_ALL:
       return {
         ...state,
-        isModalClearAllVisible: action.payload
+        isModalClearAllVisible: action.payload,
       }
 
     case TOGGLE_MODAL_DELETE:
       return {
         ...state,
-        isModalDeleteVisible: action.payload
+        isModalDeleteVisible: action.payload,
       }
   }
 }

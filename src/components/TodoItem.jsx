@@ -1,6 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
+import TodoContext from "../context/todo/TodoContext"
 
-const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
+const TodoItem = ({ todo, deleteTodo, setEditMode }) => {
+  const context = useContext(TodoContext)
+  const { toggleTodoStatus } = context
+
   return (
     <div className="todo-item">
       <div className="todo--title">
@@ -13,7 +17,7 @@ const TodoItem = ({ todo, toogleStatus, deleteTodo, setEditMode }) => {
               ? `btn btn--circle btn-active`
               : `btn btn--circle btn-done`
           }
-          onClick={() => toogleStatus(todo.id)}
+          onClick={() => toggleTodoStatus(todo.id)}
           title="Toggle Status"
         >
           {todo.isActive ? (

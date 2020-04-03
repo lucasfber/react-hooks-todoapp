@@ -6,18 +6,17 @@ import Filter from "./Filter"
 import TodoContext from "../context/todo/TodoContext"
 
 const TodoList = ({
-  toogleStatus,
   deleteTodo,
   setEditMode,
   showModalDelete,
-  setShowModalDelete
+  setShowModalDelete,
 }) => {
   const [todoId, setTodoId] = useState(null)
 
   const context = useContext(TodoContext)
   const { todos, filter } = context
 
-  const getTodoIdToDelete = id => {
+  const getTodoIdToDelete = (id) => {
     setShowModalDelete(true)
     setTodoId(id)
   }
@@ -25,7 +24,7 @@ const TodoList = ({
   const filterTodos = () => {
     return filter === null
       ? todos
-      : todos.filter(todo => todo.isActive === filter)
+      : todos.filter((todo) => todo.isActive === filter)
   }
 
   return (
@@ -54,7 +53,6 @@ const TodoList = ({
             <TodoItem
               key={index}
               todo={todo}
-              toogleStatus={toogleStatus}
               deleteTodo={getTodoIdToDelete}
               setEditMode={setEditMode}
             />

@@ -12,8 +12,6 @@ import TodoState from "./context/todo/TodoState"
 const App = () => {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState("")
-  const [alert, setAlert] = useState(null)
-  const [editMode, setEditMode] = useState(false)
   const [todo, setTodo] = useState({})
   const [placeholderText, setPlaceholderText] = useState("")
   const [showModalDelete, setShowModalDelete] = useState(false)
@@ -24,59 +22,21 @@ const App = () => {
       : setPlaceholderText("What needs to be done?")
   }, [])
 
-  const addTodo = e => {
-    e.preventDefault()
-
-    if (text.length > 0) {
-      if (editMode) {
-        const id = todo.id
-
-        setTodos(
-          todos.map(todo => (todo.id === id ? { ...todo, title: text } : todo))
-        )
-
-        setEditMode(false)
-        setText("")
-        setTodo({})
-        setAlert(null)
-      } else {
-        const todo = { id: todos.length + 1, title: text, isActive: true }
-        setTodos(todos.concat(todo))
-        setText("")
-      }
-    } else {
-      setAlert("Please enter a title/description to your Todo!")
-    }
-  }
-
   const getInnerWidth = () => {
     return window.innerWidth
   }
 
-  const changeInput = e => {
-    setText(e.target.value)
-    setAlert(null)
-  }
-
-  const toogleStatus = id => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
-      )
-    )
-  }
-
-  const deleteTodo = id => {
+  const deleteTodo = (id) => {
     console.log("to chamando?", id)
-    setTodos(todos.filter(todo => todo.id !== id))
+    setTodos(todos.filter((todo) => todo.id !== id))
   }
 
-  const changeEditMode = id => {
-    const todo = todos.filter(todo => todo.id === id)[0]
+  const changeEditMode = (id) => {
+    const todo = todos.filter((todo) => todo.id === id)[0]
 
     setTodo(todo)
     setText(todo.title)
-    setEditMode(true)
+    //setEditMode(true)
   }
 
   return (
@@ -91,16 +51,9 @@ const App = () => {
                 path="/"
                 render={() => (
                   <Fragment>
-                    <TodoForm
-                      changeInput={changeInput}
-                      text={text}
-                      showClearAll={todos.length > 1}
-                      editMode={editMode}
-                      placeholderText={placeholderText}
-                    />
+                    <TodoForm placeholderText={placeholderText} />
 
                     <TodoList
-                      toogleStatus={toogleStatus}
                       deleteTodo={deleteTodo}
                       setEditMode={changeEditMode}
                       showModalDelete={showModalDelete}
