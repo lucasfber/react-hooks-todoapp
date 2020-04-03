@@ -3,14 +3,15 @@ import React, { useReducer } from "react"
 import {
   TOGGLE_MODAL_DELETE,
   TOGGLE_MODAL_CLEAR_ALL,
-  CLEAR_ALL
+  CLEAR_ALL,
+  SET_FILTER
 } from "../types"
 import TodoContext from "./TodoContext"
 import TodoReducer from "./TodoReducer"
 
 const TodoState = props => {
   const initialState = {
-    todos: ["foo", "bar"],
+    todos: [1, 2],
     isModalDeleteVisible: false,
     isModalClearAllVisible: false,
     filter: null
@@ -20,6 +21,10 @@ const TodoState = props => {
 
   const clearAll = () => {
     dispatch({ type: CLEAR_ALL })
+  }
+
+  const setFilter = value => {
+    dispatch({ type: SET_FILTER, payload: value })
   }
 
   const toggleModalClearAll = value => {
@@ -38,6 +43,7 @@ const TodoState = props => {
         filter: state.filter,
         todos: state.todos,
         clearAll,
+        setFilter,
         toggleModalClearAll,
         toggleModalDelete
       }}

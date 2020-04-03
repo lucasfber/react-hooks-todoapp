@@ -4,7 +4,6 @@ import "./App.scss"
 
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
-import Filter from "./components/Filter"
 
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
@@ -19,7 +18,6 @@ const App = () => {
   const [todo, setTodo] = useState({})
   const [placeholderText, setPlaceholderText] = useState("")
   const [showModalDelete, setShowModalDelete] = useState(false)
-  const [showModalClearAll, setShowModalClearAll] = useState(false)
 
   useEffect(() => {
     getInnerWidth() > 1279
@@ -69,10 +67,6 @@ const App = () => {
     )
   }
 
-  const changeFilter = filter => {
-    setFilter(filter)
-  }
-
   const deleteTodo = id => {
     console.log("to chamando?", id)
     setTodos(todos.filter(todo => todo.id !== id))
@@ -90,10 +84,6 @@ const App = () => {
     return filter === null
       ? todos
       : todos.filter(todo => todo.isActive === filter)
-  }
-
-  const viewAllTodos = () => {
-    setFilter(null)
   }
 
   return (
@@ -116,15 +106,7 @@ const App = () => {
                       showClearAll={todos.length > 1}
                       editMode={editMode}
                       placeholderText={placeholderText}
-                      setShowModalClearAll={setShowModalClearAll}
                     />
-                    {todos.length > 1 && (
-                      <Filter
-                        viewAllTodos={viewAllTodos}
-                        filter={filter}
-                        changeFilter={changeFilter}
-                      />
-                    )}
 
                     <TodoList
                       todos={filterTodos()}

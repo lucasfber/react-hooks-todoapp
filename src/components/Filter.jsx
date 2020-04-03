@@ -1,23 +1,28 @@
-import React from "react"
+import React, { useContext } from "react"
 
-const Filter = ({ viewAllTodos, changeFilter, filter }) => {
+import TodoContext from "../context/todo/TodoContext"
+
+const Filter = () => {
+  const context = useContext(TodoContext)
+  const { setFilter, filter } = context
+
   return (
     <div className="filter">
       <span
         className={`${filter === null ? "selected" : ""}`}
-        onClick={viewAllTodos}
+        onClick={() => setFilter(null)}
       >
         View all /{" "}
       </span>
       <span
         className={`${filter ? "selected" : ""}`}
-        onClick={() => changeFilter(true)}
+        onClick={() => setFilter(true)}
       >
         Active /{" "}
       </span>
       <span
         className={`${filter === false ? "selected" : ""}`}
-        onClick={() => changeFilter(false)}
+        onClick={() => setFilter(false)}
       >
         Completed
       </span>

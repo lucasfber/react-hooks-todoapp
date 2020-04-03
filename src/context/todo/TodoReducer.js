@@ -1,7 +1,8 @@
 import {
+  CLEAR_ALL,
+  SET_FILTER,
   TOGGLE_MODAL_CLEAR_ALL,
-  TOGGLE_MODAL_DELETE,
-  CLEAR_ALL
+  TOGGLE_MODAL_DELETE
 } from "../types.js"
 
 export default (state, action) => {
@@ -15,6 +16,12 @@ export default (state, action) => {
         todos: [],
         isModalClearAllVisible: false,
         filer: null
+      }
+
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload
       }
 
     case TOGGLE_MODAL_CLEAR_ALL:

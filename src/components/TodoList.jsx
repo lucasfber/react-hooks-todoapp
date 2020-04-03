@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, Fragment, useContext } from "react"
 import TodoItem from "./TodoItem"
 import Modal from "./Modal"
+import Filter from "./Filter"
+
+import TodoContext from "../context/todo/TodoContext"
 
 const TodoList = ({
-  todos,
   toogleStatus,
   deleteTodo,
   setEditMode,
@@ -12,36 +14,48 @@ const TodoList = ({
 }) => {
   const [todoId, setTodoId] = useState(null)
 
+  const context = useContext(TodoContext)
+  const { todos, filter } = context
+
   const getTodoIdToDelete = id => {
     setShowModalDelete(true)
     setTodoId(id)
   }
 
   return (
-    <div className="todo-list">
-      {showModalDelete && (
-        <Modal
-          title="Delete?"
-          text="Do you want delete this todo?"
-          onAccept={() => {
-            setShowModalDelete(false)
-            deleteTodo(todoId)
-          }}
-          onDeny={() => setShowModalDelete(false)}
+    <Fragment>
+      {todos.length > 1 && (
+        <Filter
+          viewAllTodos={() => console.log("viewAllTodos")}
+          filter={filter}
+          changeFilter={() => console.log("changeFilter")}
         />
       )}
-      <ul>
-        {todos.map((todo, index) => (
-          <TodoItem
-            key={index}
-            todo={todo}
-            toogleStatus={toogleStatus}
-            deleteTodo={getTodoIdToDelete}
-            setEditMode={setEditMode}
+      <div className="todo-list">
+        {showModalDelete && (
+          <Modal
+            title="Delete?"
+            text="Do you want delete this todo?"
+            onAccept={() => {
+              setShowModalDelete(false)
+              deleteTodo(todoId)
+            }}
+            onDeny={() => setShowModalDelete(false)}
           />
-        ))}
-      </ul>
-    </div>
+        )}
+        <ul>
+          {todos.map((todo, index) => (
+            <TodoItem
+              key={index}
+              todo={todo}
+              toogleStatus={toogleStatus}
+              deleteTodo={getTodoIdToDelete}
+              setEditMode={setEditMode}
+            />
+          ))}
+        </ul>
+      </div>
+    </Fragment>
   )
 }
 
