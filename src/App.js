@@ -12,7 +12,6 @@ import TodoState from "./context/todo/TodoState"
 const App = () => {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState("")
-  const [filter, setFilter] = useState(null)
   const [alert, setAlert] = useState(null)
   const [editMode, setEditMode] = useState(false)
   const [todo, setTodo] = useState({})
@@ -80,12 +79,6 @@ const App = () => {
     setEditMode(true)
   }
 
-  const filterTodos = () => {
-    return filter === null
-      ? todos
-      : todos.filter(todo => todo.isActive === filter)
-  }
-
   return (
     <TodoState>
       <Router>
@@ -99,8 +92,6 @@ const App = () => {
                 render={() => (
                   <Fragment>
                     <TodoForm
-                      alert={alert}
-                      addTodo={addTodo}
                       changeInput={changeInput}
                       text={text}
                       showClearAll={todos.length > 1}
@@ -109,7 +100,6 @@ const App = () => {
                     />
 
                     <TodoList
-                      todos={filterTodos()}
                       toogleStatus={toogleStatus}
                       deleteTodo={deleteTodo}
                       setEditMode={changeEditMode}

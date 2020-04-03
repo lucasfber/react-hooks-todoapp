@@ -22,6 +22,12 @@ const TodoList = ({
     setTodoId(id)
   }
 
+  const filterTodos = () => {
+    return filter === null
+      ? todos
+      : todos.filter(todo => todo.isActive === filter)
+  }
+
   return (
     <Fragment>
       {todos.length > 1 && (
@@ -44,7 +50,7 @@ const TodoList = ({
           />
         )}
         <ul>
-          {todos.map((todo, index) => (
+          {filterTodos().map((todo, index) => (
             <TodoItem
               key={index}
               todo={todo}
