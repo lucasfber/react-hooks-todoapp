@@ -1,11 +1,13 @@
 import {
   ADD_TODO,
   CLEAR_ALL,
+  DELETE_TODO,
   SET_FILTER,
   TOGGLE_MODAL_CLEAR_ALL,
   TOGGLE_MODAL_DELETE,
   TOGGLE_TODO_STATUS,
   SET_TEXT,
+  SET_TODO_TO_DELETE,
   SET_PLACEHOLDER,
   TOGGLE_ALERT,
 } from "../types.js"
@@ -30,6 +32,12 @@ export default (state, action) => {
         filer: null,
       }
 
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: action.payload,
+        isModalDeleteVisible: false,
+      }
     case TOGGLE_ALERT:
       return {
         ...state,
@@ -53,6 +61,13 @@ export default (state, action) => {
         ...state,
         text: action.payload,
         isAlertActive: false,
+      }
+
+    case SET_TODO_TO_DELETE:
+      return {
+        ...state,
+        isModalDeleteVisible: true,
+        todo: { ...state.todo, id: action.payload },
       }
 
     case TOGGLE_TODO_STATUS:

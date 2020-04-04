@@ -5,21 +5,17 @@ import Filter from "./Filter"
 
 import TodoContext from "../context/todo/TodoContext"
 
-const TodoList = ({
-  deleteTodo,
-  setEditMode,
-  showModalDelete,
-  setShowModalDelete,
-}) => {
+const TodoList = ({ setEditMode, setShowModalDelete }) => {
   const [todoId, setTodoId] = useState(null)
 
   const context = useContext(TodoContext)
-  const { todos, filter } = context
-
-  const getTodoIdToDelete = (id) => {
-    setShowModalDelete(true)
-    setTodoId(id)
-  }
+  const {
+    deleteTodo,
+    isModalDeleteVisible,
+    todos,
+    toggleModalDelete,
+    filter,
+  } = context
 
   const filterTodos = () => {
     return filter === null
@@ -37,25 +33,17 @@ const TodoList = ({
         />
       )}
       <div className="todo-list">
-        {showModalDelete && (
+        {isModalDeleteVisible && (
           <Modal
             title="Delete?"
             text="Do you want delete this todo?"
-            onAccept={() => {
-              setShowModalDelete(false)
-              deleteTodo(todoId)
-            }}
-            onDeny={() => setShowModalDelete(false)}
+            onAccept={deleteTodo}
+            onDeny={() => toggleModalDelete(false)}
           />
         )}
         <ul>
           {filterTodos().map((todo, index) => (
-            <TodoItem
-              key={index}
-              todo={todo}
-              deleteTodo={getTodoIdToDelete}
-              setEditMode={setEditMode}
-            />
+            <TodoItem key={index} todo={todo} setEditMode={setEditMode} />
           ))}
         </ul>
       </div>

@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import TodoContext from "../context/todo/TodoContext"
 
-const TodoItem = ({ todo, deleteTodo, setEditMode }) => {
+const TodoItem = ({ todo, setEditMode }) => {
   const context = useContext(TodoContext)
-  const { toggleTodoStatus } = context
+  const { toggleTodoStatus, setTodoToDelete } = context
 
   return (
     <div className="todo-item">
@@ -38,7 +38,7 @@ const TodoItem = ({ todo, deleteTodo, setEditMode }) => {
         <button
           className="btn btn-delete btn--circle"
           title="Delete Todo"
-          onClick={() => deleteTodo(todo.id)}
+          onClick={() => setTodoToDelete(todo.id)}
         >
           <i className="fas fa-trash-alt"></i>
         </button>

@@ -5,12 +5,14 @@ import {
   TOGGLE_MODAL_CLEAR_ALL,
   CLEAR_ALL,
   SET_FILTER,
+  DELETE_TODO,
   EDIT_TODO,
   ADD_TODO,
   TOGGLE_ALERT,
   SET_PLACEHOLDER,
   SET_TEXT,
   TOGGLE_TODO_STATUS,
+  SET_TODO_TO_DELETE,
 } from "../types"
 import TodoContext from "./TodoContext"
 import TodoReducer from "./TodoReducer"
@@ -64,6 +66,14 @@ const TodoState = (props) => {
     dispatch({ type: CLEAR_ALL })
   }
 
+  const deleteTodo = () => {
+    const id = state.todo.id
+    dispatch({
+      type: DELETE_TODO,
+      payload: state.todos.filter((todo) => todo.id !== id),
+    })
+  }
+
   const editTodo = () => {
     console.log("editTodo")
   }
@@ -78,6 +88,10 @@ const TodoState = (props) => {
 
   const setFilter = (value) => {
     dispatch({ type: SET_FILTER, payload: value })
+  }
+
+  const setTodoToDelete = (id) => {
+    dispatch({ type: SET_TODO_TO_DELETE, payload: id })
   }
 
   const setPlaceholder = (text) => {
@@ -114,12 +128,15 @@ const TodoState = (props) => {
         filter: state.filter,
         placeholder: state.placeholder,
         text: state.text,
+        todo: state.todo,
         todos: state.todos,
         addTodo,
         clearAll,
+        deleteTodo,
         editTodo,
         setFilter,
         setInputText,
+        setTodoToDelete,
         setPlaceholder,
         toggleAlertMessage,
         toggleModalClearAll,

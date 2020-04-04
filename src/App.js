@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react"
+import React, { useState, Fragment } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.scss"
 
@@ -14,11 +14,6 @@ const App = () => {
   const [text, setText] = useState("")
   const [todo, setTodo] = useState({})
   const [showModalDelete, setShowModalDelete] = useState(false)
-
-  const deleteTodo = (id) => {
-    console.log("to chamando?", id)
-    setTodos(todos.filter((todo) => todo.id !== id))
-  }
 
   const changeEditMode = (id) => {
     const todo = todos.filter((todo) => todo.id === id)[0]
@@ -42,7 +37,6 @@ const App = () => {
                   <Fragment>
                     <TodoForm />
                     <TodoList
-                      deleteTodo={deleteTodo}
                       setEditMode={changeEditMode}
                       showModalDelete={showModalDelete}
                       setShowModalDelete={setShowModalDelete}
