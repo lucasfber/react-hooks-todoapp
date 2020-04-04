@@ -1,13 +1,11 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.scss"
-
-import TodoForm from "./components/TodoForm"
-import TodoList from "./components/TodoList"
 
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
 import TodoState from "./context/todo/TodoState"
+import Home from "./pages/Home"
 
 const App = () => {
   return (
@@ -17,16 +15,7 @@ const App = () => {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => (
-                  <Fragment>
-                    <TodoForm />
-                    <TodoList />
-                  </Fragment>
-                )}
-              />
+              <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
             </Switch>
           </div>
