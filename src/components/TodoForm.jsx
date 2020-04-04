@@ -23,6 +23,7 @@ const TodoForm = () => {
     window.innerWidth > 1279
       ? setPlaceholder("Type your 'TODO' and press 'Enter'")
       : setPlaceholder("What needs to be done?")
+    /* eslint-disable-next-line */
   }, [])
 
   const handleInputChange = (e) => {

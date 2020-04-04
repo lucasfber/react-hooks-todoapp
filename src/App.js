@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react"
+import React, { Fragment } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.scss"
 
@@ -10,19 +10,6 @@ import Navbar from "./components/Navbar"
 import TodoState from "./context/todo/TodoState"
 
 const App = () => {
-  const [todos, setTodos] = useState([])
-  const [text, setText] = useState("")
-  const [todo, setTodo] = useState({})
-  const [showModalDelete, setShowModalDelete] = useState(false)
-
-  const changeEditMode = (id) => {
-    const todo = todos.filter((todo) => todo.id === id)[0]
-
-    setTodo(todo)
-    setText(todo.title)
-    //setEditMode(true)
-  }
-
   return (
     <TodoState>
       <Router>
@@ -36,11 +23,7 @@ const App = () => {
                 render={() => (
                   <Fragment>
                     <TodoForm />
-                    <TodoList
-                      setEditMode={changeEditMode}
-                      showModalDelete={showModalDelete}
-                      setShowModalDelete={setShowModalDelete}
-                    />
+                    <TodoList />
                   </Fragment>
                 )}
               />

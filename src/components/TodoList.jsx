@@ -1,13 +1,11 @@
-import React, { useState, Fragment, useContext } from "react"
+import React, { Fragment, useContext } from "react"
 import TodoItem from "./TodoItem"
 import Modal from "./Modal"
 import Filter from "./Filter"
 
 import TodoContext from "../context/todo/TodoContext"
 
-const TodoList = ({ setEditMode, setShowModalDelete }) => {
-  const [todoId, setTodoId] = useState(null)
-
+const TodoList = () => {
   const context = useContext(TodoContext)
   const {
     deleteTodo,
@@ -43,7 +41,7 @@ const TodoList = ({ setEditMode, setShowModalDelete }) => {
         )}
         <ul>
           {filterTodos().map((todo, index) => (
-            <TodoItem key={index} todo={todo} setEditMode={setEditMode} />
+            <TodoItem key={index} todo={todo} />
           ))}
         </ul>
       </div>

@@ -2,6 +2,7 @@ import {
   ADD_TODO,
   CLEAR_ALL,
   DELETE_TODO,
+  EDIT_TODO,
   SET_FILTER,
   TOGGLE_MODAL_CLEAR_ALL,
   TOGGLE_MODAL_DELETE,
@@ -10,6 +11,7 @@ import {
   SET_TODO_TO_DELETE,
   SET_PLACEHOLDER,
   TOGGLE_ALERT,
+  SET_TODO_TO_EDIT,
 } from "../types.js"
 
 export default (state, action) => {
@@ -37,6 +39,15 @@ export default (state, action) => {
         ...state,
         todos: action.payload,
         isModalDeleteVisible: false,
+      }
+
+    case EDIT_TODO:
+      return {
+        ...state,
+        isEditModeActive: false,
+        text: "",
+        todo: {},
+        todos: action.payload,
       }
     case TOGGLE_ALERT:
       return {
@@ -68,6 +79,14 @@ export default (state, action) => {
         ...state,
         isModalDeleteVisible: true,
         todo: { ...state.todo, id: action.payload },
+      }
+
+    case SET_TODO_TO_EDIT:
+      return {
+        ...state,
+        isEditModeActive: true,
+        todo: action.payload,
+        text: action.payload.title,
       }
 
     case TOGGLE_TODO_STATUS:

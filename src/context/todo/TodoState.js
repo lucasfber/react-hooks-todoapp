@@ -13,6 +13,7 @@ import {
   SET_TEXT,
   TOGGLE_TODO_STATUS,
   SET_TODO_TO_DELETE,
+  SET_TODO_TO_EDIT,
 } from "../types"
 import TodoContext from "./TodoContext"
 import TodoReducer from "./TodoReducer"
@@ -37,9 +38,8 @@ const TodoState = (props) => {
 
     if (state.text.length > 0) {
       if (state.isEditModeActive) {
-        //const id = state.todo.id
+        const id = state.todo.id
 
-        dispatch({ type: EDIT_TODO })
         /* setTodos(
           state.todos.map(todo => (todo.id === id ? { ...todo, title: text } : todo))
         )
@@ -48,6 +48,12 @@ const TodoState = (props) => {
         setText("")
         setTodo({})
         setAlert(null) */
+        dispatch({
+          type: EDIT_TODO,
+          payload: state.todos.map((todo) =>
+            todo.id === id ? { ...todo, title: state.text } : todo
+          ),
+        })
       } else {
         console.log("Entra aqui?")
         const todo = {
@@ -94,6 +100,10 @@ const TodoState = (props) => {
     dispatch({ type: SET_TODO_TO_DELETE, payload: id })
   }
 
+  const setTodoToEdit = (todo) => {
+    dispatch({ type: SET_TODO_TO_EDIT, payload: todo })
+  }
+
   const setPlaceholder = (text) => {
     dispatch({ type: SET_PLACEHOLDER, payload: text })
   }
@@ -123,6 +133,7 @@ const TodoState = (props) => {
     <TodoContext.Provider
       value={{
         isAlertActive: state.isAlertActive,
+        isEditModeActive: state.isEditModeActive,
         isModalClearAllVisible: state.isModalClearAllVisible,
         isModalDeleteVisible: state.isModalDeleteVisible,
         filter: state.filter,
@@ -137,6 +148,7 @@ const TodoState = (props) => {
         setFilter,
         setInputText,
         setTodoToDelete,
+        setTodoToEdit,
         setPlaceholder,
         toggleAlertMessage,
         toggleModalClearAll,
