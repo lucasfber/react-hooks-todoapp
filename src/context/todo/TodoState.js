@@ -7,7 +7,7 @@ import {
   SET_FILTER,
   EDIT_TODO,
   ADD_TODO,
-  SET_ALERT,
+  TOGGLE_ALERT,
   SET_PLACEHOLDER,
   SET_TEXT,
   TOGGLE_TODO_STATUS,
@@ -17,8 +17,8 @@ import TodoReducer from "./TodoReducer"
 
 const TodoState = (props) => {
   const initialState = {
-    alert: null,
     todos: [],
+    isAlertActive: false,
     isEditModeActive: false,
     isModalDeleteVisible: false,
     isModalClearAllVisible: false,
@@ -56,7 +56,7 @@ const TodoState = (props) => {
         dispatch({ type: ADD_TODO, payload: state.todos.concat(todo) })
       }
     } else {
-      setAlertMessage("Please enter a title/description to your Todo!")
+      dispatch({ type: TOGGLE_ALERT, payload: true })
     }
   }
 
@@ -68,8 +68,8 @@ const TodoState = (props) => {
     console.log("editTodo")
   }
 
-  const setAlertMessage = (message) => {
-    dispatch({ type: SET_ALERT, payload: message })
+  const toggleAlertMessage = (value) => {
+    dispatch({ type: TOGGLE_ALERT, payload: value })
   }
 
   const setInputText = (text) => {
@@ -108,7 +108,7 @@ const TodoState = (props) => {
   return (
     <TodoContext.Provider
       value={{
-        alert: state.alert,
+        isAlertActive: state.isAlertActive,
         isModalClearAllVisible: state.isModalClearAllVisible,
         isModalDeleteVisible: state.isModalDeleteVisible,
         filter: state.filter,
@@ -121,6 +121,7 @@ const TodoState = (props) => {
         setFilter,
         setInputText,
         setPlaceholder,
+        toggleAlertMessage,
         toggleModalClearAll,
         toggleModalDelete,
         toggleTodoStatus,

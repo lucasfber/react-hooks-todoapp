@@ -7,8 +7,8 @@ const TodoForm = () => {
   const context = useContext(TodoContext)
   const {
     addTodo,
-    alert,
     clearAll,
+    isAlertActive,
     isEditModeActive,
     isModalClearAllVisible,
     setInputText,
@@ -40,7 +40,11 @@ const TodoForm = () => {
         />
       )}
       <form onSubmit={addTodo}>
-        {alert && <p className="alert">{alert}</p>}
+        {isAlertActive && (
+          <p className="alert">
+            Please enter a title/description to your Todo!
+          </p>
+        )}
         <input
           type="text"
           className="todo-text"

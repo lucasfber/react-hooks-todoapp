@@ -7,6 +7,7 @@ import {
   TOGGLE_TODO_STATUS,
   SET_TEXT,
   SET_PLACEHOLDER,
+  TOGGLE_ALERT,
 } from "../types.js"
 
 export default (state, action) => {
@@ -29,6 +30,12 @@ export default (state, action) => {
         filer: null,
       }
 
+    case TOGGLE_ALERT:
+      return {
+        ...state,
+        isAlertActive: action.payload,
+      }
+
     case SET_FILTER:
       return {
         ...state,
@@ -45,6 +52,7 @@ export default (state, action) => {
       return {
         ...state,
         text: action.payload,
+        isAlertActive: false,
       }
 
     case TOGGLE_TODO_STATUS:
