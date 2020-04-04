@@ -26,6 +26,7 @@ const TodoItem = ({ todo, deleteTodo, setEditMode }) => {
             <i className="fas fa-exclamation done"></i>
           )}
         </button>
+        {/* BUTTON EDIT */}
         <button
           className="btn btn-edit btn--circle"
           title="Edit Todo"
@@ -33,6 +34,7 @@ const TodoItem = ({ todo, deleteTodo, setEditMode }) => {
         >
           <i className="far fa-edit"></i>
         </button>
+        {/* BUTTON DELETE */}
         <button
           className="btn btn-delete btn--circle"
           title="Delete Todo"

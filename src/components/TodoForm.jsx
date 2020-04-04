@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import TodoContext from "../context/todo/TodoContext"
 
 import Modal from "../components/Modal"
 
-const TodoForm = ({ placeholderText }) => {
+const TodoForm = () => {
   const context = useContext(TodoContext)
   const {
     addTodo,
@@ -12,12 +12,20 @@ const TodoForm = ({ placeholderText }) => {
     isEditModeActive,
     isModalClearAllVisible,
     setInputText,
+    setPlaceholder,
+    placeholder,
     text,
     todos,
-    toggleModalClearAll
+    toggleModalClearAll,
   } = context
 
-  const handleInputChange = e => {
+  useEffect(() => {
+    window.innerWidth > 1279
+      ? setPlaceholder("Type your 'TODO' and press 'Enter'")
+      : setPlaceholder("What needs to be done?")
+  }, [])
+
+  const handleInputChange = (e) => {
     setInputText(e.target.value)
   }
 
@@ -36,7 +44,7 @@ const TodoForm = ({ placeholderText }) => {
         <input
           type="text"
           className="todo-text"
-          placeholder={placeholderText}
+          placeholder={placeholder}
           value={text}
           onChange={handleInputChange}
         />

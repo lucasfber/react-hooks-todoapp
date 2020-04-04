@@ -8,6 +8,7 @@ import {
   EDIT_TODO,
   ADD_TODO,
   SET_ALERT,
+  SET_PLACEHOLDER,
   SET_TEXT,
   TOGGLE_TODO_STATUS,
 } from "../types"
@@ -22,6 +23,7 @@ const TodoState = (props) => {
     isModalDeleteVisible: false,
     isModalClearAllVisible: false,
     filter: null,
+    placeholder: "",
     text: "",
     todo: {},
   }
@@ -78,6 +80,10 @@ const TodoState = (props) => {
     dispatch({ type: SET_FILTER, payload: value })
   }
 
+  const setPlaceholder = (text) => {
+    dispatch({ type: SET_PLACEHOLDER, payload: text })
+  }
+
   const toggleModalClearAll = (value) => {
     dispatch({ type: TOGGLE_MODAL_CLEAR_ALL, payload: value })
   }
@@ -106,6 +112,7 @@ const TodoState = (props) => {
         isModalClearAllVisible: state.isModalClearAllVisible,
         isModalDeleteVisible: state.isModalDeleteVisible,
         filter: state.filter,
+        placeholder: state.placeholder,
         text: state.text,
         todos: state.todos,
         addTodo,
@@ -113,6 +120,7 @@ const TodoState = (props) => {
         editTodo,
         setFilter,
         setInputText,
+        setPlaceholder,
         toggleModalClearAll,
         toggleModalDelete,
         toggleTodoStatus,

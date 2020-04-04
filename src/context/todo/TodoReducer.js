@@ -6,6 +6,7 @@ import {
   TOGGLE_MODAL_DELETE,
   TOGGLE_TODO_STATUS,
   SET_TEXT,
+  SET_PLACEHOLDER,
 } from "../types.js"
 
 export default (state, action) => {
@@ -32,6 +33,12 @@ export default (state, action) => {
       return {
         ...state,
         filter: action.payload,
+      }
+
+    case SET_PLACEHOLDER:
+      return {
+        ...state,
+        placeholder: action.payload,
       }
 
     case SET_TEXT:

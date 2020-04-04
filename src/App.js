@@ -13,18 +13,7 @@ const App = () => {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState("")
   const [todo, setTodo] = useState({})
-  const [placeholderText, setPlaceholderText] = useState("")
   const [showModalDelete, setShowModalDelete] = useState(false)
-
-  useEffect(() => {
-    getInnerWidth() > 1279
-      ? setPlaceholderText("Type your 'TODO' and press 'Enter'")
-      : setPlaceholderText("What needs to be done?")
-  }, [])
-
-  const getInnerWidth = () => {
-    return window.innerWidth
-  }
 
   const deleteTodo = (id) => {
     console.log("to chamando?", id)
@@ -51,8 +40,7 @@ const App = () => {
                 path="/"
                 render={() => (
                   <Fragment>
-                    <TodoForm placeholderText={placeholderText} />
-
+                    <TodoForm />
                     <TodoList
                       deleteTodo={deleteTodo}
                       setEditMode={changeEditMode}
