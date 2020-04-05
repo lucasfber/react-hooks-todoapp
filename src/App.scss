@@ -314,6 +314,74 @@ $blue: #3498db;
   }
 }
 
+/* === ABOUT PAGE === */
+.About {
+  .main-title {
+    font-size: 3.2rem;
+  }
+
+  .description {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+
+  .icon-done {
+    color: $main-purple;
+    font-size: 1rem;
+  }
+
+  .icon-sand-timer {
+    color: $blue;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    font-size: 1.7rem;
+  }
+
+  .secondary-title {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    color: $main-purple;
+    font-size: 1.4rem;
+    margin-top: .5rem;
+    span {
+      color: $green;
+    }
+  }
+
+  .features,
+  .improvements {
+    li {
+      padding-left: 1rem;
+    }
+    /* li {
+      font-size: 1.4rem;
+      margin-bottom: .5rem;
+      li {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    } */  
+  }
+
+  .inner-features {
+    margin-top: .5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.3rem;
+  }
+
+
+ /*  li {
+    padding-left: 1rem;
+  } */
+}
+
+
 /* === TABLET === */
 @media screen and (min-width: 768px) {
   .btn--circle {
@@ -412,6 +480,29 @@ $blue: #3498db;
       }
     }
   }
+
+  /* === ABOUT PAGE === */
+  .About {
+    .main-title {
+      font-size: 4.2rem;
+    }
+
+    .description {
+      font-size: 2rem;
+    }
+
+    .secondary-title {
+      font-size: 1.8rem;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+    }
+
+    .inner-features {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 /* === DESKTOP === */
@@ -484,5 +575,10 @@ $blue: #3498db;
     .todo--title {
       max-width: 70rem;
     }
+  }
+
+  /* === ABOUT PAGE === */
+  .About {
+   padding-top: 2rem;
   }
 }
