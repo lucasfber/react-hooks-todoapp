@@ -1,3 +1,23 @@
+## Description:
+
+Aplicação no estilo TO-DO app feita com React usando Hooks, Context API, React Router.
+
+### Built with:
+
+- React (Hooks)
+- Context API
+- React Router
+- Sass (SCSS)
+- Web Design Responsivo
+
+## Demo:
+
+![React Logo](demo.gif)
+
+## Live version:
+
+https://todoapp989.netlify.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

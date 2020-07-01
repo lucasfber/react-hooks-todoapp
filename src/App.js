@@ -5,7 +5,7 @@ import "./App.scss"
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
 import TodoState from "./context/todo/TodoState"
-import Home from "./pages/Home"
+import FormLogin from "./pages/FormLogin"
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={FormLogin} />
               <Route exact path="/about" component={About} />
             </Switch>
           </div>
